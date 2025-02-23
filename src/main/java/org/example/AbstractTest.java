@@ -26,7 +26,7 @@ public class AbstractTest {
         Vehicle vehicle = new Vehicle() {
             @Override
             void start() {
-                System.out.println("Inner class");
+                System.out.println("Inner class1");
             }
         };
 
