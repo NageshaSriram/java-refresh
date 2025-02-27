@@ -5,7 +5,7 @@ class PrintNumbers {
     public synchronized  void odd() {
         try {
             while (number < 10) {
-                while (number % 2 == 0) {
+                if (number % 2 == 0) {
                     wait();
                 }
                 System.out.println(Thread.currentThread().getName() + " -> " + number);
@@ -21,7 +21,7 @@ class PrintNumbers {
     public synchronized  void even() {
         try {
             while (number < 10) {
-                while (number % 2 == 1) {
+                if (number % 2 == 1) {
                     wait();
                 }
                 System.out.println(Thread.currentThread().getName() + " -> " + number);
