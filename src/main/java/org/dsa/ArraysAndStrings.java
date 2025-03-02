@@ -27,6 +27,28 @@ public class ArraysAndStrings {
         int[] arrayOne = {1,12,-5,-6,50,3};
         double res3 = maxSumSubArray(arrayOne, 4);
         System.out.println(res3);
+
+        // Leetcode #3: Longest Substring Without Repeating Characters
+        int res4 = longestSubStr("ckilbkd");
+        System.out.println("Longest sub string is: " + res4);
+
+        
+    }
+
+    // Input: "abcabcbb"
+    // I tried this one, it won't work
+    private static int longestSubStr(String s) {
+        int left = 0, max = 0;
+        Set<Character> set =  new HashSet<>();
+        for (int right = 0; right < s.length(); right++) {
+            while(set.contains(s.charAt(right))) {
+                set.remove(s.charAt(left));
+                left++;
+            }
+            set.add(s.charAt(right));
+            max = Math.max(max, set.size());
+        }
+        return max;
     }
 
     public static boolean isArrayIsPalindrome(int[] arr) {
