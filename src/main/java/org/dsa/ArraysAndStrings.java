@@ -19,7 +19,7 @@ public class ArraysAndStrings {
         System.out.println(res1[0] + " " + res1[1] + " " + res1[2]);
 
         // threeSumToZero (Pending)
-        int[] nums = {-1, 0, 1, 2, -1, -4};
+        int[] nums = {0,0,-2,-2,4,2,2,4,0};
         List<List<Integer>> res2 = threeSumToZero(nums);
         System.out.println("threeSumToZero " +res2);
     }
@@ -70,28 +70,31 @@ public class ArraysAndStrings {
     }
 
     //{-1, 0, 1, 2, -1, -4};
+    // res: [[-1, 0, 1], [-1, -1, 2]]
     public static List<List<Integer>> threeSumToZero(int[] arr) {
-        int left = 0, right = arr.length -1, rightLeft = right - 1, sum;
         Arrays.sort(arr);
         List<List<Integer>> res = new ArrayList<>();
-        while (left < rightLeft) {
-            if ((arr[left] == arr[left+1])) {
-                left++;
-                continue;
-            }
-            if ((arr[rightLeft] == arr[rightLeft-1])) {
-                right--;
-                rightLeft--;
-                continue;
-            }
-            sum = arr[left] + arr[rightLeft] + arr[right];
-            if (sum == 0) {
-                res.add(Arrays.asList(arr[left], arr[rightLeft], arr[right]));
-            } else if(sum < 0) {
-                left++;
-            } else {
-                right--;
-                rightLeft--;
+        for (int i=0; i<arr.length; i++) {
+            if (i > 0 && arr[i] == arr[i-1]) i++;
+            int left = i+1, right = arr.length -1, sum =0;
+            while (left < right) {
+                sum = arr[i] + arr[left] + arr[right];
+                if (sum == 0) {
+                    res.add(Arrays.asList(arr[i], arr[left], arr[right]));
+                    left++;
+                    right--;
+
+                    while((left < right) && arr[left] == arr[left-1]) {
+                        left++;
+                    }
+                    while((left < right) && arr[right] == arr[right-1]) {
+                        right--;
+                    }
+                } else if (sum < 0) {
+                    left++;
+                } else {
+                    right--;
+                }
             }
         }
         return res;
