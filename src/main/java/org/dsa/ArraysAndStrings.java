@@ -22,6 +22,11 @@ public class ArraysAndStrings {
         int[] nums = {0,0,-2,-2,4,2,2,4,0};
         List<List<Integer>> res2 = threeSumToZero(nums);
         System.out.println("threeSumToZero " +res2);
+
+        // maxSumSubArray
+        int[] arrayOne = {1,12,-5,-6,50,3};
+        double res3 = maxSumSubArray(arrayOne, 4);
+        System.out.println(res3);
     }
 
     public static boolean isArrayIsPalindrome(int[] arr) {
@@ -98,5 +103,28 @@ public class ArraysAndStrings {
             }
         }
         return res;
+    }
+
+    // Maximum Average Subarray
+    public static double maxSumSubArray(int[] arr, int k) {
+        int n = arr.length;
+        if (n < k) return 0.0; // Edge case
+
+        // Step 1: Compute the sum of the first window
+        int windowSum = 0;
+        for (int i = 0; i < k; i++) {
+            windowSum += arr[i];
+        }
+
+        int maxSum = windowSum;
+
+        // Step 2: Slide the window
+        for (int i = k; i < n; i++) {
+            windowSum = windowSum - arr[i - k] + arr[i]; // Slide window
+            maxSum = Math.max(maxSum, windowSum);
+        }
+
+        // Step 3: Return the maximum average
+        return (double) maxSum / k;
     }
 }
